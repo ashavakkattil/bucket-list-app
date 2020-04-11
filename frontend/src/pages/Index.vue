@@ -125,7 +125,7 @@ export default {
   width: 300px
 }
 .option-select{
-  width: 30%
+  width: 40%
 }
 .done{
   text-decoration:aqua
