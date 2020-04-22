@@ -35,7 +35,6 @@ router.get('/:id', (req,res) => {
 
 router.post('/', (req,res) => {
     ToDoList.create(req.body, (error, task) => {
-        console.log(req.body)
         if(error){
             res.status(500).json({
                 message: error.message

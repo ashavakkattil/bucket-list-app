@@ -41,16 +41,16 @@
         <q-card-section>
           <div class='q-gutter-sm'>
             <q-list>
-              <q-item tag='label' v-ripple clickable>
+              <q-item tag='label' v-ripple>
                 <q-item-section avatar>
                   <q-checkbox
                     v-model='task.task_status'
                     color='secondary'
-                    class='no-pointer-events'
+                    @input="checkTask(task)"
                   />
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label class='text-capitalize'>{{task.task_name}}</q-item-label>
+                  <q-item-label :class= "task.task_status ? 'done': 'text-capitalize'">{{task.task_name}}</q-item-label>
                 </q-item-section>
                 <q-item-section side>
                   <q-btn
@@ -155,6 +155,7 @@ export default {
       })
       if (response && response.status === 200) {
         this.taskList = response.data.data
+        console.log(this.taskList)
       }
     },
     async addTask () {
@@ -188,6 +189,7 @@ export default {
         })
     },
     saveTask (item) {
+      console.log(item)
       this.$axios.put('/todolists/' + item._id, item).then(response => {
         if (response) {
           this.editTaskDialog = false
@@ -199,6 +201,9 @@ export default {
           color: 'negative'
         })
       })
+    },
+    checkTask (item) {
+      this.saveTask(item)
     },
     deleteTask (item, index) {
       this.$q
@@ -238,6 +243,8 @@ export default {
   width: 40%
 }
 .done {
-  text-decoration: aqua
+  color: #888;
+  text-decoration: line-through;
+  text-transform: capitalize;
 }
 </style>
