@@ -53,7 +53,7 @@
                 <q-item-section>
                   <q-item-label :class= "task.task_status ? 'done': 'text-capitalize'">{{task.task_name}}</q-item-label>
                 </q-item-section>
-                <q-item-section side>
+                <q-item-section side v-if="!task.task_status">
                   <q-btn
                     icon='edit'
                     dense
