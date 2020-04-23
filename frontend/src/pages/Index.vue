@@ -51,7 +51,7 @@
                   />
                 </q-item-section>
                 <q-item-section>
-                  <q-item-label :class= "task.task_status ? 'done': 'text-capitalize'">{{task.task_name}}</q-item-label>
+                  <q-item-label :class= "task.task_status ? 'done': 'not-done'">{{task.task_name}}</q-item-label>
                 </q-item-section>
                 <q-item-section side v-if="!task.task_status">
                   <q-btn
@@ -194,6 +194,7 @@ export default {
       this.$axios.put('/todolists/' + item._id, item).then(response => {
         if (response) {
           this.editTaskDialog = false
+          this.toDo = {}
           this.getTasks()
         }
       }).catch(error => {
@@ -250,6 +251,8 @@ export default {
 .done {
   color: #888;
   text-decoration: line-through;
-  text-transform: capitalize;
+}
+.not-done::first-letter, .done::first-letter {
+  text-transform:uppercase
 }
 </style>
