@@ -1,9 +1,9 @@
 <template>
   <div>
     <main-header :pageTitle='title' :tabColour='tabColour' />
-    <q-page class='flex flex-center' v-if='!taskList.length'>
+    <q-page class='flex flex-center' v-if='!taskList.length && !selectFilterApplied'>
       <div class='no-task'>
-        <h5>Your List is Empty {{taskList.length}}</h5>
+        <h5>Your List is Empty</h5>
         <q-btn
           round
           color='primary'
@@ -24,6 +24,7 @@
             option-value='id'
             v-model='selectedOption'
             class='option-select'
+            @input="selectTaskType"
           ></q-select>
         </div>
         <div class='col-3 text-right'>
@@ -141,7 +142,8 @@ export default {
       selectedOption: '',
       newTask: '',
       taskList: [],
-      editTaskDialog: false
+      editTaskDialog: false,
+      selectFilterApplied: false
     }
   },
   mounted () {
@@ -150,12 +152,11 @@ export default {
   },
   methods: {
     async getTasks () {
-      const response = await this.$axios.get('todolists/').catch(error => {
+      const response = await this.$axios.get(`todolists/?tasks=${this.selectedOption.id}`).catch(error => {
         console.log('Error', error.message)
       })
       if (response && response.status === 200) {
         this.taskList = response.data.data
-        console.log(this.taskList)
       }
     },
     async addTask () {
@@ -167,7 +168,8 @@ export default {
           console.log('error', error.message)
         })
       if (response && response.status === 200) {
-        this.toDo = Object.assign({}, response.data.data)
+        this.taskList = response.data.data
+        this.newTask = ''
         this.taskDialog = false
         this.getTasks()
       }
@@ -189,7 +191,6 @@ export default {
         })
     },
     saveTask (item) {
-      console.log(item)
       this.$axios.put('/todolists/' + item._id, item).then(response => {
         if (response) {
           this.editTaskDialog = false
@@ -228,6 +229,10 @@ export default {
               })
             })
         })
+    },
+    selectTaskType () {
+      this.selectFilterApplied = true
+      this.getTasks()
     }
   }
 }
