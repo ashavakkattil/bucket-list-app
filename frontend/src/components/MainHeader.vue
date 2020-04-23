@@ -52,7 +52,7 @@ export default {
     return {
       leftDrawerOpen: false,
       essentialLinks: [
-        {
+        /* {
           title: 'Bucket List',
           icon: 'mdi-airballoon'
         },
@@ -67,7 +67,7 @@ export default {
         {
           title: 'Weekly Planner',
           icon: 'mdi-calendar-today'
-        },
+        }, */
         {
           title: 'Notes',
           icon: 'mdi-format-list-bulleted'
