@@ -1,5 +1,5 @@
 <template>
- <div> <q-header elevated>
+ <div> <q-header elevated :class= "'bg-' + tabColour">
       <q-toolbar>
         <q-btn
           flat
@@ -69,8 +69,14 @@ export default {
           icon: 'mdi-calendar-today'
         }, */
         {
+          title: 'To Do List',
+          icon: 'mdi-format-list-bulleted',
+          link: '/todolists'
+        },
+        {
           title: 'Notes',
-          icon: 'mdi-format-list-bulleted'
+          icon: 'mdi-format-list-bulleted',
+          link: '/notes'
         }
       ]
     }
