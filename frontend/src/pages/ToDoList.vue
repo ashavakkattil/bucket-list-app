@@ -131,7 +131,7 @@ export default {
   data() {
     return {
       title: "To Do List",
-      tabColour: "info",
+      tabColour: "secondary",
       toDo: { task_name: "", task_status: false },
       taskDialog: false,
       options: [

@@ -1,5 +1,5 @@
 <template>
- <div> <q-header elevated :class= "'bg-' + tabColour">
+ <div> <q-header elevated :class= "'bg-' + tabColour" >
       <q-toolbar>
         <q-btn
           flat
@@ -75,7 +75,7 @@ export default {
         },
         {
           title: 'Notes',
-          icon: 'mdi-format-list-bulleted',
+          icon: 'mdi-library-books',
           link: '/notes'
         }
       ]
